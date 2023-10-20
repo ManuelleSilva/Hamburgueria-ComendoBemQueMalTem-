@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <h1>Faça seu pedido na Lanchonete "Comendo Bem, Que Mal Tem"</h1>
+  <script>
+    var lanches = [
+      { nome: "X1", preco: 1.36 },
+      { nome: "X2", preco: 2.31 },
+      { nome: "X3", preco: 2.81 },
+      { nome: "X4", preco: 3.21 }
+    ];
+    var acompanhamentos = [
+      { nome: "Nuggets", preco: 3.69 },
+      { nome: "Fritas", preco: 1.58 }
+    ];
+    var bebidas = [
+      { nome: "Coca-Cola", preco: 1.48 },
+      { nome: "Fanta", preco: 2.58 },
+      { nome: "Água", preco: 0.98 }
+    ];
+    var pedido = [];
+    var nomeCliente = prompt("Digite o seu nome:");
+    while (true) {
+      var escolhaLanche = parseInt(prompt("Escolha o número do lanche:\n1. X1\n2. X2\n3. X3\n4. X4\n0. Encerrar pedido"));
+      if (escolhaLanche === 0) {
+        break;
+      }
+      if (escolhaLanche >= 1 && escolhaLanche <= 4) {
+        var quantidadeLanche = parseInt(prompt("Digite a quantidade desejada:"));
+        pedido.push({ nome: lanches[escolhaLanche - 1].nome, preco: lanches[escolhaLanche - 1].preco, quantidade: quantidadeLanche });
+      }
+    }
+    while (true) {
+      var escolhaAcompanhamento = parseInt(prompt("Escolha o número do acompanhamento:\n1. Nuggets\n2. Fritas\n0. Encerrar pedido"));
+      if (escolhaAcompanhamento === 0) {
+        break;
+      }
+      if (escolhaAcompanhamento === 1 || escolhaAcompanhamento === 2) {
+        var quantidadeAcompanhamento = parseInt(prompt("Digite a quantidade desejada:"));
+        pedido.push({ nome: acompanhamentos[escolhaAcompanhamento - 1].nome, preco: acompanhamentos[escolhaAcompanhamento - 1].preco, quantidade: quantidadeAcompanhamento });
+      }
+    }
+    while (true) {
+      var escolhaBebida = parseInt(prompt("Escolha o número da bebida:\n1. Coca-Cola\n2. Fanta\n3. Água\n0. Encerrar pedido"));
+      if (escolhaBebida === 0) {
+        break;
+      }
+      if (escolhaBebida >= 1 && escolhaBebida <= 3) {
+        var quantidadeBebida = parseInt(prompt("Digite a quantidade desejada:"));
+        pedido.push({ nome: bebidas[escolhaBebida - 1].nome, preco: bebidas[escolhaBebida - 1].preco, quantidade: quantidadeBebida });
+      }
+    }
+    var totalConta = 0;
+    var pedidoFinal = nomeCliente + " pediu:\n";
+    for (var i = 0; i < pedido.length; i++) {
+      var item = pedido[i];
+      var precoItem = item.preco * item.quantidade;
+      totalConta += precoItem;
+      pedidoFinal += item.nome + " *" + item.quantidade + " = R$" + precoItem.toFixed(2) + "<br>";
+    }
+    pedidoFinal += "Total da conta: R$" + totalConta.toFixed(2);
+    var pedidoDiv = document.createElement("div");
+    pedidoDiv.innerHTML = pedidoFinal;
+    document.body.appendChild(pedidoDiv);
+  </script>
+</body>
+</html>
